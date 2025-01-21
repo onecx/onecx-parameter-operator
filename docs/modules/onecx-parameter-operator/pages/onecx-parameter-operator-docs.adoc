@@ -1,0 +1,74 @@
+
+include::onecx-parameter-operator-attributes.adoc[opts=optional]
+
+=== Default properties
+
+.{properties-file}
+[%collapsible%open]
+====
+[source,properties,subs=attributes+]
+----
+quarkus.operator-sdk.controllers.parameter.retry.max-attempts=10
+quarkus.operator-sdk.controllers.parameter.retry.interval.initial=5000
+quarkus.operator-sdk.controllers.parameter.retry.interval.multiplier=3
+quarkus.operator-sdk.controllers.parameter.retry.interval.max=300000
+quarkus.kubernetes-client.devservices.override-kubeconfig=true
+%prod.quarkus.rest-client.parameter_client.providers=io.quarkus.oidc.client.reactive.filter.OidcClientRequestReactiveFilter
+%prod.quarkus.oidc-client.client-id=${quarkus.application.name}
+quarkus.operator-sdk.crd.validate=false
+quarkus.operator-sdk.helm.enabled=true
+quarkus.openapi-generator.codegen.input-base-dir=target/tmp/openapi
+quarkus.openapi-generator.codegen.spec.onecx_parameter_operator_v1_yaml.config-key=parameter_client
+quarkus.openapi-generator.codegen.spec.onecx_parameter_operator_v1_yaml.base-package=gen.org.tkit.onecx.parameter.operator.v1
+quarkus.openapi-generator.codegen.spec.onecx_parameter_operator_v1_yaml.return-response=true
+quarkus.openapi-generator.codegen.spec.onecx_parameter_operator_v1_yaml.enable-security-generation=false
+----
+====
+
+=== Extensions
+
+include::onecx-parameter-operator-extensions.adoc[opts=optional]
+
+=== Container
+
+{docker-registry}[Docker registry]
+
+
+=== Helm
+
+{helm-registry}[Helm registry]
+
+Default values
+
+.{helm-file}
+[source,yaml]
+----
+app:
+  name: operator
+  image:
+    repository: "onecx/onecx-parameter-operator"
+  envCustom:
+    - name: KUBERNETES_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+  serviceAccount:
+    enabled: true
+
+  operator:
+    keycloak:
+      client:
+        enabled: true
+        spec:
+          kcConfig:
+            defaultClientScopes: [ ocx-pa:write ]
+
+----
+
+:
+          kcConfig:
+            defaultClientScopes: [ ocx-pa:write ]
+
+----
+
+
