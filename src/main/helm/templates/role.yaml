@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.app.name }}-role
+rules:
+  - apiGroups:
+      - onecx.tkit.org
+    resources:
+      - parameters
+      - parameters/status
+      - parameters/finalizers
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+      - update
+      - create
+      - delete
+  - verbs:
+      - "get"
+      - "update"
+      - "create"
+      - "patch"
+    apiGroups:
+      - "coordination.k8s.io"
+    resources:
+      - "leases"

@@ -1,0 +1,5 @@
+
+:docker-registry: https://github.com/onecx/onecx-parameter-operator/pkgs/container/onecx-parameter-operator
+:helm-registry: https://github.com/onecx/onecx-parameter-operator/pkgs/container/charts%2Fonecx-parameter-operator
+:properties-file: src/main/resources/application.properties
+:helm-file: src/main/helm/values.yaml
