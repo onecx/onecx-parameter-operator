@@ -12,6 +12,7 @@ import io.quarkus.test.Mock;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.smallrye.config.SmallRyeConfig;
 
+@SuppressWarnings("java:S1118")
 @QuarkusTestResource(MockServerTestResource.class)
 public abstract class AbstractTest {
 
@@ -23,7 +24,7 @@ public abstract class AbstractTest {
         @Produces
         @ApplicationScoped
         @Mock
-        ParameterConfig config() {
+        ParameterConfig createConfig() {
             return config.unwrap(SmallRyeConfig.class).getConfigMapping(ParameterConfig.class);
         }
     }

@@ -12,9 +12,6 @@ public class ParameterStatus extends ObservedGenerationAwareStatus {
     @JsonProperty("productName")
     private String productName;
 
-    @JsonProperty("name")
-    private String name;
-
     @JsonProperty("response-code")
     private int responseCode;
 
@@ -30,14 +27,6 @@ public class ParameterStatus extends ObservedGenerationAwareStatus {
 
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getProductName() {

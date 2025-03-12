@@ -1,22 +1,18 @@
 package org.tkit.onecx.parameter.operator;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ParameterSpec {
 
-    @JsonProperty("orgId")
+    @JsonProperty(value = "orgId", required = true)
     private String orgId;
 
-    @JsonProperty("key")
+    @JsonProperty(value = "key", required = true)
     private String key;
-
-    @JsonProperty(value = "name", required = true)
-    private String name;
-
-    @JsonProperty(value = "displayName", required = true)
-    private String displayName;
 
     @JsonProperty(value = "applicationId", required = true)
     private String applicationId;
@@ -24,29 +20,15 @@ public class ParameterSpec {
     @JsonProperty(value = "productName", required = true)
     private String productName;
 
-    @JsonProperty(value = "description", required = true)
-    private String description;
+    @JsonProperty(value = "parameters", required = true)
+    private Map<String, ParameterItem> parameters;
 
-    @JsonProperty(value = "importValue", required = true)
-    private String importValue;
-
-    @JsonProperty(value = "value")
-    private Object value;
-
-    public String getName() {
-        return name;
+    public Map<String, ParameterItem> getParameters() {
+        return parameters;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setParameters(Map<String, ParameterItem> parameters) {
+        this.parameters = parameters;
     }
 
     public String getApplicationId() {
@@ -65,30 +47,6 @@ public class ParameterSpec {
         this.productName = productName;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImportValue() {
-        return importValue;
-    }
-
-    public void setImportValue(String importValue) {
-        this.importValue = importValue;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
     public String getOrgId() {
         return orgId;
     }
@@ -103,5 +61,42 @@ public class ParameterSpec {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public static class ParameterItem {
+
+        @JsonProperty(value = "displayName", required = true)
+        private String displayName;
+
+        @JsonProperty(value = "description", required = true)
+        private String description;
+
+        @JsonProperty(value = "value", required = true)
+        private String value;
+
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public void setDisplayName(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
     }
 }

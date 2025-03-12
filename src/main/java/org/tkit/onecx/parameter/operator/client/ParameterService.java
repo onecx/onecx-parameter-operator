@@ -37,7 +37,7 @@ public class ParameterService {
 
     public int updateParameter(Parameter parameter) {
         var spec = parameter.getSpec();
-        var url = parameterConfig.client().keys().get(spec.getKey());
+        var url = parameterConfig.clients().get(spec.getKey());
         if (url == null) {
             log.warn("No URL defined for the key '{}', resource: {}", spec.getKey(), parameter.getMetadata().getName());
             throw new MissingKeyConfiguration(spec.getKey());
@@ -62,9 +62,8 @@ public class ParameterService {
                 })
                 .build(OperatorParametersApi.class);
 
-        try (var response = client.createOrUpdateParameterValue(spec.getProductName(), spec.getApplicationId(), spec.getName(),
-                dto)) {
-            log.info("Update parameter name {} status {}", spec.getName(), response.getStatus());
+        try (var response = client.createOrUpdateParameterValue(spec.getProductName(), spec.getApplicationId(), dto)) {
+            log.info("Update parameter name {} status {}", parameter.getMetadata().getName(), response.getStatus());
             return response.getStatus();
         }
     }
@@ -90,7 +89,7 @@ public class ParameterService {
     public static class MissingKeyConfiguration extends RuntimeException {
 
         public MissingKeyConfiguration(String key) {
-            super("Missing configuration for key " + key);
+            super("Missing client configuration for key " + key);
         }
     }
 }
