@@ -17,13 +17,6 @@ import io.smallrye.config.WithName;
 public interface ParameterConfig {
 
     /**
-     * Digest algorithms.
-     */
-    @WithName("digest")
-    @WithDefault("MD5")
-    String digest();
-
-    /**
      * Token configuration.
      */
     @WithDefault("token")
@@ -40,6 +33,12 @@ public interface ParameterConfig {
      */
     @WithName("leader-election")
     LeaderElectionConfig leaderElectionConfig();
+
+    /**
+     * Clients key configuration
+     */
+    @WithName("clients")
+    Map<String, String> clients();
 
     /**
      * Client configuration.
@@ -60,11 +59,6 @@ public interface ParameterConfig {
         @WithDefault("30")
         int connectionPoolSize();
 
-        /**
-         * Clients key configuration
-         */
-        @WithName("key")
-        Map<String, String> keys();
     }
 
     /**

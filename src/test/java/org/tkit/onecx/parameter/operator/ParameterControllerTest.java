@@ -6,6 +6,8 @@ import static org.awaitility.Awaitility.await;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
+import java.util.HashMap;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.HttpMethod;
 import jakarta.ws.rs.core.Response;
@@ -26,9 +28,9 @@ import io.quarkiverse.mockserver.test.InjectMockServerClient;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-class PermissionControllerTest extends AbstractTest {
+class ParameterControllerTest extends AbstractTest {
 
-    static final Logger log = LoggerFactory.getLogger(PermissionControllerTest.class);
+    static final Logger log = LoggerFactory.getLogger(ParameterControllerTest.class);
 
     @Inject
     Operator operator;
@@ -40,7 +42,7 @@ class PermissionControllerTest extends AbstractTest {
     MockServerClient mockServerClient;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         Awaitility.setDefaultPollDelay(2, SECONDS);
         Awaitility.setDefaultPollInterval(2, SECONDS);
         Awaitility.setDefaultTimeout(10, SECONDS);
@@ -65,7 +67,6 @@ class PermissionControllerTest extends AbstractTest {
             assertThat(mfeStatus.getStatus()).isNotNull().isEqualTo(ParameterStatus.Status.ERROR);
         });
 
-        // mockServerClient.clear("mock");
     }
 
     @Test
@@ -76,10 +77,7 @@ class PermissionControllerTest extends AbstractTest {
         data.setMetadata(new ObjectMetaBuilder().withName("null-spec").withNamespace(client.getNamespace()).build());
         data.setSpec(null);
 
-        log.info("Creating test parameter object: {}", data);
         client.resource(data).serverSideApply();
-
-        log.info("Waiting 4 seconds and status muss be still null");
 
         await().pollDelay(4, SECONDS).untilAsserted(() -> {
             ParameterStatus mfeStatus = client.resource(data).get().getStatus();
@@ -91,7 +89,7 @@ class PermissionControllerTest extends AbstractTest {
     void productUpdateEmptySpecTest() {
         // create mock rest endpoint for workspace api
         mockServerClient
-                .when(request().withPath("/parametermgmt/operator/v1/parameters/test1/test-3/name").withMethod(HttpMethod.PUT))
+                .when(request().withPath("/default/operator/v1/parameters/test1/test-3").withMethod(HttpMethod.PUT))
                 .withId("mock")
                 .respond(httpRequest -> response().withStatusCode(Response.Status.NO_CONTENT.getStatusCode())
                         .withContentType(MediaType.APPLICATION_JSON));
@@ -100,13 +98,15 @@ class PermissionControllerTest extends AbstractTest {
         var m = new ParameterSpec();
         m.setProductName("test1");
         m.setApplicationId("test-3");
-        m.setImportValue("p1");
-        m.setKey("parametermgmt");
+        m.setKey("default");
         m.setOrgId("default");
-        m.setName("name");
-        m.setDisplayName("displayname");
-        m.setDescription("desc");
-        m.setValue(new Object());
+        m.setParameters(new HashMap<>());
+
+        var n1 = new ParameterSpec.ParameterItem();
+        n1.setValue("");
+        n1.setDisplayName("display name");
+        n1.setDescription("desc");
+        m.getParameters().put("name", n1);
 
         var data = new Parameter();
         data.setMetadata(new ObjectMetaBuilder().withName("to-update-spec").withNamespace(client.getNamespace()).build());
@@ -114,8 +114,6 @@ class PermissionControllerTest extends AbstractTest {
 
         log.info("Creating test parameter object: {}", data);
         client.resource(data).serverSideApply();
-
-        log.info("Waiting 4 seconds and status muss be still null");
 
         await().pollDelay(2, SECONDS).untilAsserted(() -> {
             ParameterStatus mfeStatus = client.resource(data).get().getStatus();
@@ -137,59 +135,32 @@ class PermissionControllerTest extends AbstractTest {
         mockServerClient.clear("mock");
     }
 
-    //    @Test
-    //    void productUpdateNoDescriptionTest() {
-    //        //        ParameterUpdateRequest request = new ParameterUpdateRequest();
-    //        //        request.setName("test-3");
-    //        //        request.setProductName("test1");
-    //        //        request.setDisplayName("");
-    //        //        request.setApplicationId("app1");
-    //        // create mock rest endpoint for workspace api
-    //        mockServerClient
-    //                .when(request().withPath("/operator/v1/parameters").withMethod(HttpMethod.PUT))
-    //                .withId("mock")
-    //                .respond(httpRequest -> response().withStatusCode(Response.Status.NO_CONTENT.getStatusCode())
-    //                        .withContentType(MediaType.APPLICATION_JSON));
-    //        operator.start();
-    //
-    //        var m = new ParameterSpec();
-    //        m.setProductName("test1");
-    //        m.setName("test-3");
-    //        m.setApplicationId("app1");
-    //        var data = new Parameter();
-    //        data.setMetadata(new ObjectMetaBuilder().withName("to-update-spec").withNamespace(client.getNamespace()).build());
-    //        data.setSpec(m);
-    //
-    //        log.info("Updating test parameter object: {}", data);
-    //        var exception = catchThrowableOfType(KubernetesClientException.class, () -> client.resource(data).serverSideApply());
-    //        assertThat(exception).isNotNull();
-    //        mockServerClient.clear("mock");
-    //    }
-
     @Test
     void productRestClientExceptionTest() {
         // create mock rest endpoint for workspace api
         mockServerClient
-                .when(request().withPath("/parametermgmt/operator/v1/parameters/test1/test-error-1/n1")
+                .when(request().withPath("/custom/operator/v1/parameters/test1/test-error-1")
+                        .withBody("{\"a\":123}")
                         .withMethod(HttpMethod.PUT))
                 .withId("mock")
                 .respond(httpRequest -> response().withStatusCode(500));
         operator.start();
         var m = new ParameterSpec();
+        m.setKey("custom");
         m.setProductName("test1");
         m.setApplicationId("test-error-1");
-        m.setName("n1");
-        m.setImportValue("p1");
-        m.setKey("parametermgmt");
+        m.setParameters(new HashMap<>());
+
+        var n1 = new ParameterSpec.ParameterItem();
+        n1.setValue("{\"a\":123}");
+        n1.setDisplayName("display name");
+        n1.setDescription("desc");
+        m.getParameters().put("n1", n1);
 
         var data = new Parameter();
         data.setMetadata(new ObjectMetaBuilder().withName("client-error").withNamespace(client.getNamespace()).build());
         data.setSpec(m);
-
-        log.info("Creating test parameter object: {}", data);
         client.resource(data).serverSideApply();
-
-        log.info("Waiting 4 seconds and status muss be still null");
 
         await().pollDelay(2, SECONDS).untilAsserted(() -> {
             ParameterStatus mfeStatus = client.resource(data).get().getStatus();
@@ -197,7 +168,6 @@ class PermissionControllerTest extends AbstractTest {
             assertThat(mfeStatus.getStatus()).isNotNull().isEqualTo(ParameterStatus.Status.ERROR);
         });
         mockServerClient.clear("mock");
-
     }
 
 }

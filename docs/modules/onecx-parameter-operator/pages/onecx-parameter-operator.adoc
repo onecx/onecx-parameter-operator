@@ -8,23 +8,6 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-digest]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-digest[`onecx.parameter.operator.digest`]##
-
-[.description]
---
-Digest algorithms.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_DIGEST+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_DIGEST+++`
-endif::add-copy-button-to-env-var[]
---
-|string
-|`MD5`
-
 a| [[onecx-parameter-operator_onecx-parameter-operator-token-user-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-token-user-name[`onecx.parameter.operator.token.user-name`]##
 
 [.description]
@@ -127,23 +110,6 @@ endif::add-copy-button-to-env-var[]
 |int
 |`30`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-client-key-keys]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-client-key-keys[`onecx.parameter.operator.client.key."keys"`]##
-
-[.description]
---
-Clients key configuration
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_CLIENT_KEY__KEYS_+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_CLIENT_KEY__KEYS_+++`
-endif::add-copy-button-to-env-var[]
---
-|Map<String,String>
-|
-
 a| [[onecx-parameter-operator_onecx-parameter-operator-leader-election-lease-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-leader-election-lease-name[`onecx.parameter.operator.leader-election.lease-name`]##
 
 [.description]
@@ -160,6 +126,23 @@ endif::add-copy-button-to-env-var[]
 --
 |string
 |`onecx-parameter-operator-lease`
+
+a| [[onecx-parameter-operator_onecx-parameter-operator-clients-clients]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-clients-clients[`onecx.parameter.operator.clients."clients"`]##
+
+[.description]
+--
+Clients key configuration
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_CLIENTS__CLIENTS_+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++ONECX_PARAMETER_OPERATOR_CLIENTS__CLIENTS_+++`
+endif::add-copy-button-to-env-var[]
+--
+|Map<String,String>
+|
 
 |===
 

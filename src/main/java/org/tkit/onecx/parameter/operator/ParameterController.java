@@ -31,7 +31,6 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
         var status = new ParameterStatus();
         status.setApplicationId(null);
         status.setProductName(null);
-        status.setName(null);
         status.setResponseCode(responseCode);
         status.setStatus(ParameterStatus.Status.ERROR);
         status.setMessage(e.getMessage());
@@ -41,7 +40,7 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
     @Override
     public UpdateControl<Parameter> reconcile(Parameter parameter, Context<Parameter> context) throws Exception {
-        log.info("Reconcile resource: {} name: {}", parameter.getMetadata().getName(), parameter.getSpec().getName());
+        log.info("Reconcile resource: {}", parameter.getMetadata().getName());
 
         int responseCode = service.updateParameter(parameter);
 
@@ -55,7 +54,6 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
         ParameterSpec spec = parameter.getSpec();
         result.setApplicationId(spec.getApplicationId());
         result.setProductName(spec.getProductName());
-        result.setName(spec.getName());
 
         result.setResponseCode(responseCode);
         var status = responseCode == 204 ? ParameterStatus.Status.UPDATED

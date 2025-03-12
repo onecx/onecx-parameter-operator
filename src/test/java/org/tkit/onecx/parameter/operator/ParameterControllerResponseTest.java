@@ -3,6 +3,8 @@ package org.tkit.onecx.parameter.operator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.util.HashMap;
+
 import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +18,7 @@ import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-class PermissionControllerResponseTest extends AbstractTest {
+class ParameterControllerResponseTest extends AbstractTest {
 
     @InjectMock
     ParameterService parameterService;
@@ -35,7 +37,10 @@ class PermissionControllerResponseTest extends AbstractTest {
         var s = new ParameterSpec();
         s.setProductName("test1");
         s.setApplicationId("test-3");
-        s.setImportValue("p1");
+        s.setParameters(new HashMap<>());
+        var n = new ParameterSpec.ParameterItem();
+        n.setValue("p1");
+        s.getParameters().put("p1", n);
 
         Parameter m = new Parameter();
         m.setSpec(s);
