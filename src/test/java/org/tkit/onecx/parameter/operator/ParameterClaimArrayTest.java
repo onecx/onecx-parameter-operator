@@ -31,7 +31,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.config.SmallRyeConfig;
 
 @QuarkusTest
-public class ParameterClaimArrayTest extends AbstractTest {
+class ParameterClaimArrayTest extends AbstractTest {
 
     @Inject
     Operator operator;
@@ -49,7 +49,7 @@ public class ParameterClaimArrayTest extends AbstractTest {
     MockServerClient mockServerClient;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         Awaitility.setDefaultPollDelay(2, SECONDS);
         Awaitility.setDefaultPollInterval(2, SECONDS);
         Awaitility.setDefaultTimeout(5, SECONDS);

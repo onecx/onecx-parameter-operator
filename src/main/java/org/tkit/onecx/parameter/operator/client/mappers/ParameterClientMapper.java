@@ -11,8 +11,7 @@ import gen.org.tkit.onecx.parameter.operator.v1.model.ParametersUpdateRequest;
 public interface ParameterClientMapper {
 
     default ParametersUpdateRequest map(ParameterSpec spec) {
-        ParametersUpdateRequest r = create(spec.getProductName(), spec.getApplicationId());
-        return r;
+        return create(spec.getProductName(), spec.getApplicationId());
     }
 
     @Mapping(target = "parameters", ignore = true)
