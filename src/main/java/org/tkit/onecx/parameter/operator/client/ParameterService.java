@@ -37,10 +37,9 @@ public class ParameterService {
 
     public int updateParameter(Parameter parameter) {
         var spec = parameter.getSpec();
-        var url = parameterConfig.clients().get(spec.getKey());
+        var url = spec.getUrl();
         if (url == null) {
-            log.warn("No URL defined for the key '{}', resource: {}", spec.getKey(), parameter.getMetadata().getName());
-            throw new MissingKeyConfiguration(spec.getKey());
+            url = parameterConfig.client().url();
         }
         var dto = mapper.map(spec);
 

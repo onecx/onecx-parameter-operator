@@ -8,7 +8,24 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-token-user-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-token-user-name[`onecx.parameter.operator.token.user-name`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-key]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-key[`onecx.parameters.operator.key`]##
+
+[.description]
+--
+Operator key configuration.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_KEY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_KEY+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`onecx`
+
+a| [[onecx-parameter-operator_onecx-parameters-operator-token-user-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-token-user-name[`onecx.parameters.operator.token.user-name`]##
 
 [.description]
 --
@@ -16,16 +33,16 @@ Username for rest call.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_TOKEN_USER_NAME+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_TOKEN_USER_NAME+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_TOKEN_USER_NAME+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_TOKEN_USER_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`parameter-orchestrator-operator`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-token-header-param]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-token-header-param[`onecx.parameter.operator.token.header-param`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-token-header-param]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-token-header-param[`onecx.parameters.operator.token.header-param`]##
 
 [.description]
 --
@@ -33,16 +50,16 @@ Token header parameter.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_TOKEN_HEADER_PARAM+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_TOKEN_HEADER_PARAM+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_TOKEN_HEADER_PARAM+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_TOKEN_HEADER_PARAM+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`apm-principal-token`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-token-claim-organization-param]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-token-claim-organization-param[`onecx.parameter.operator.token.claim-organization-param`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-token-claim-organization-param]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-token-claim-organization-param[`onecx.parameters.operator.token.claim-organization-param`]##
 
 [.description]
 --
@@ -50,16 +67,16 @@ Token claim organization parameter.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`orgId`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-token-claim-organization-param-array]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-token-claim-organization-param-array[`onecx.parameter.operator.token.claim-organization-param-array`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-token-claim-organization-param-array]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-token-claim-organization-param-array[`onecx.parameters.operator.token.claim-organization-param-array`]##
 
 [.description]
 --
@@ -67,16 +84,16 @@ Token claim organization parameter array.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM_ARRAY+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM_ARRAY+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM_ARRAY+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_TOKEN_CLAIM_ORGANIZATION_PARAM_ARRAY+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`false`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-client-shared]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-client-shared[`onecx.parameter.operator.client.shared`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-client-shared]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-client-shared[`onecx.parameters.operator.client.shared`]##
 
 [.description]
 --
@@ -84,16 +101,16 @@ Set to true to share the HTTP client between REST clients.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_CLIENT_SHARED+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_CLIENT_SHARED+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_CLIENT_SHARED+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_CLIENT_SHARED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
 |`true`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-client-connection-pool-size]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-client-connection-pool-size[`onecx.parameter.operator.client.connection-pool-size`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-client-connection-pool-size]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-client-connection-pool-size[`onecx.parameters.operator.client.connection-pool-size`]##
 
 [.description]
 --
@@ -101,16 +118,33 @@ The size of the rest client connection pool.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_CLIENT_CONNECTION_POOL_SIZE+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_CLIENT_CONNECTION_POOL_SIZE+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_CLIENT_CONNECTION_POOL_SIZE+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_CLIENT_CONNECTION_POOL_SIZE+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
 |`30`
 
-a| [[onecx-parameter-operator_onecx-parameter-operator-leader-election-lease-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-leader-election-lease-name[`onecx.parameter.operator.leader-election.lease-name`]##
+a| [[onecx-parameter-operator_onecx-parameters-operator-client-url]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-client-url[`onecx.parameters.operator.client.url`]##
+
+[.description]
+--
+Client URL configuration.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_CLIENT_URL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_CLIENT_URL+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`http://onecx-parameter-svc:8080`
+
+a| [[onecx-parameter-operator_onecx-parameters-operator-leader-election-lease-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-leader-election-lease-name[`onecx.parameters.operator.leader-election.lease-name`]##
 
 [.description]
 --
@@ -118,31 +152,14 @@ Lease name
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_LEADER_ELECTION_LEASE_NAME+++[]
+Environment variable: env_var_with_copy_button:+++ONECX_PARAMETERS_OPERATOR_LEADER_ELECTION_LEASE_NAME+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_LEADER_ELECTION_LEASE_NAME+++`
+Environment variable: `+++ONECX_PARAMETERS_OPERATOR_LEADER_ELECTION_LEASE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
 |`onecx-parameter-operator-lease`
-
-a| [[onecx-parameter-operator_onecx-parameter-operator-clients-clients]] [.property-path]##link:#onecx-parameter-operator_onecx-parameter-operator-clients-clients[`onecx.parameter.operator.clients."clients"`]##
-
-[.description]
---
-Clients key configuration
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++ONECX_PARAMETER_OPERATOR_CLIENTS__CLIENTS_+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++ONECX_PARAMETER_OPERATOR_CLIENTS__CLIENTS_+++`
-endif::add-copy-button-to-env-var[]
---
-|Map<String,String>
-|
 
 |===
 

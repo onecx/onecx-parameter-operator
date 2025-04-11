@@ -1,7 +1,5 @@
 package org.tkit.onecx.parameter.operator;
 
-import java.util.Map;
-
 import io.quarkus.runtime.annotations.ConfigDocFilename;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
@@ -12,20 +10,27 @@ import io.smallrye.config.WithName;
 
 @StaticInitSafe
 @ConfigDocFilename("onecx-parameter-operator.adoc")
-@ConfigMapping(prefix = "onecx.parameter.operator")
+@ConfigMapping(prefix = "onecx.parameters.operator")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
 public interface ParameterConfig {
 
     /**
+     * Operator key configuration.
+     */
+    @WithName("key")
+    @WithDefault("onecx")
+    String key();
+
+    /**
      * Token configuration.
      */
-    @WithDefault("token")
+    @WithName("token")
     TokenConfig token();
 
     /**
      * Client configuration.
      */
-    @WithDefault("client")
+    @WithName("client")
     ConfigClient client();
 
     /**
@@ -33,12 +38,6 @@ public interface ParameterConfig {
      */
     @WithName("leader-election")
     LeaderElectionConfig leaderElectionConfig();
-
-    /**
-     * Clients key configuration
-     */
-    @WithName("clients")
-    Map<String, String> clients();
 
     /**
      * Client configuration.
@@ -59,6 +58,12 @@ public interface ParameterConfig {
         @WithDefault("30")
         int connectionPoolSize();
 
+        /**
+         * Client URL configuration.
+         */
+        @WithName("url")
+        @WithDefault("http://onecx-parameter-svc:8080")
+        String url();
     }
 
     /**

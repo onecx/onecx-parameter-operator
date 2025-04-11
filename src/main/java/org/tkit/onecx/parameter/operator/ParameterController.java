@@ -3,6 +3,7 @@ package org.tkit.onecx.parameter.operator;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
 
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.onecx.parameter.operator.client.ParameterService;
@@ -15,6 +16,8 @@ import io.javaoperatorsdk.operator.processing.event.source.filter.OnUpdateFilter
 public class ParameterController implements Reconciler<Parameter>, ErrorStatusHandler<Parameter> {
 
     private static final Logger log = LoggerFactory.getLogger(ParameterController.class);
+
+    private static final String KEY = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
 
     @Inject
     ParameterService service;
@@ -66,7 +69,10 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
         @Override
         public boolean accept(Parameter resource) {
-            return resource.getSpec() != null;
+            if (resource.getSpec() == null) {
+                return false;
+            }
+            return KEY.equals(resource.getSpec().getKey());
         }
     }
 
@@ -74,7 +80,11 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
         @Override
         public boolean accept(Parameter newResource, Parameter oldResource) {
-            return newResource.getSpec() != null;
+            if (newResource.getSpec() == null) {
+                return false;
+            }
+            return KEY.equals(newResource.getSpec().getKey());
         }
     }
+
 }

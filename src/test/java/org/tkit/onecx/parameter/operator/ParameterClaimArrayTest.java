@@ -67,7 +67,7 @@ class ParameterClaimArrayTest extends AbstractTest {
 
         Mockito.when(dataConfig.token()).thenReturn(dt);
 
-        Mockito.when(dataConfig.clients()).thenReturn(tmp.clients());
+        Mockito.when(dataConfig.key()).thenReturn(tmp.key());
         Mockito.when(dataConfig.client()).thenReturn(tmp.client());
     }
 
@@ -82,9 +82,9 @@ class ParameterClaimArrayTest extends AbstractTest {
         operator.start();
 
         var m = new ParameterSpec();
+        m.setKey(KEY);
         m.setProductName("test1");
         m.setApplicationId("test-3");
-        m.setKey("default");
         m.setOrgId("default");
         m.setParameters(new HashMap<>());
 
