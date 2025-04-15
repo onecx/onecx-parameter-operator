@@ -6,7 +6,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonObjectBuilder;
-import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 
 import org.eclipse.microprofile.jwt.Claims;
@@ -43,7 +42,6 @@ public class ParameterService {
         }
         var dto = mapper.map(spec);
 
-        var token = createToken(parameter);
         var client = QuarkusRestClientBuilder.newBuilder()
                 .baseUri(URI.create(url))
                 .property(QuarkusRestClientProperties.CONNECTION_POOL_SIZE, parameterConfig.client().connectionPoolSize())
@@ -54,9 +52,12 @@ public class ParameterService {
                     @Override
                     public Uni<MultivaluedMap<String, String>> getHeaders(MultivaluedMap<String, String> incomingHeaders,
                             MultivaluedMap<String, String> clientOutgoingHeaders) {
-                        MultivaluedMap<String, String> propagatedHeaders = new MultivaluedHashMap<>();
-                        propagatedHeaders.putSingle(parameterConfig.token().headerParam(), token);
-                        return Uni.createFrom().item(propagatedHeaders);
+                        if (parameterConfig.tenant().enabled()) {
+                            var tokenConfig = parameterConfig.tenant().token();
+                            var token = createToken(tokenConfig, parameter);
+                            clientOutgoingHeaders.putSingle(tokenConfig.headerParam(), token);
+                        }
+                        return Uni.createFrom().item(clientOutgoingHeaders);
                     }
                 })
                 .build(OperatorParametersApi.class);
@@ -67,28 +68,22 @@ public class ParameterService {
         }
     }
 
-    private String createToken(Parameter parameter) {
+    private String createToken(ParameterConfig.TokenConfig config, Parameter parameter) {
 
-        var userName = parameterConfig.token().userName();
+        var userName = config.userName();
         var orgId = parameter.getSpec().getOrgId();
 
         JsonObjectBuilder claims = Json.createObjectBuilder();
         claims.add(Claims.preferred_username.name(), userName);
         claims.add(Claims.sub.name(), userName);
         if (orgId != null) {
-            if (parameterConfig.token().claimOrganizationParamArray()) {
-                claims.add(parameterConfig.token().claimOrganizationParam(), Json.createArrayBuilder().add(orgId));
+            if (config.claimOrganizationParamArray()) {
+                claims.add(config.claimOrganizationParam(), Json.createArrayBuilder().add(orgId));
             } else {
-                claims.add(parameterConfig.token().claimOrganizationParam(), orgId);
+                claims.add(config.claimOrganizationParam(), orgId);
             }
         }
         return Jwt.claims(claims.build()).sign(KeyFactory.PRIVATE_KEY);
     }
 
-    public static class MissingKeyConfiguration extends RuntimeException {
-
-        public MissingKeyConfiguration(String key) {
-            super("Missing client configuration for key " + key);
-        }
-    }
 }

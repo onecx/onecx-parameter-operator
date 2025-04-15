@@ -60,12 +60,16 @@ class ParameterClaimArrayTest extends AbstractTest {
         var tmp = config.unwrap(SmallRyeConfig.class).getConfigMapping(ParameterConfig.class);
 
         var dt = Mockito.mock(ParameterConfig.TokenConfig.class);
-        Mockito.when(dt.userName()).thenReturn(tmp.token().userName());
-        Mockito.when(dt.headerParam()).thenReturn(tmp.token().headerParam());
+        Mockito.when(dt.userName()).thenReturn(tmp.tenant().token().userName());
+        Mockito.when(dt.headerParam()).thenReturn(tmp.tenant().token().headerParam());
         Mockito.when(dt.claimOrganizationParamArray()).thenReturn(true);
-        Mockito.when(dt.claimOrganizationParam()).thenReturn(tmp.token().claimOrganizationParam());
+        Mockito.when(dt.claimOrganizationParam()).thenReturn(tmp.tenant().token().claimOrganizationParam());
 
-        Mockito.when(dataConfig.token()).thenReturn(dt);
+        var tt = Mockito.mock(ParameterConfig.TenantConfig.class);
+        Mockito.when(tt.enabled()).thenReturn(tmp.tenant().enabled());
+        Mockito.when(tt.token()).thenReturn(dt);
+
+        Mockito.when(dataConfig.tenant()).thenReturn(tt);
 
         Mockito.when(dataConfig.key()).thenReturn(tmp.key());
         Mockito.when(dataConfig.client()).thenReturn(tmp.client());
@@ -89,7 +93,7 @@ class ParameterClaimArrayTest extends AbstractTest {
         m.setParameters(new HashMap<>());
 
         var n1 = new ParameterSpec.ParameterItem();
-        n1.setValue("");
+        n1.setValue(null);
         n1.setDisplayName("display name");
         n1.setDescription("desc");
         m.getParameters().put("name", n1);

@@ -106,7 +106,7 @@ class ParameterControllerTest extends AbstractTest {
         m.setParameters(new HashMap<>());
 
         var n1 = new ParameterSpec.ParameterItem();
-        n1.setValue("");
+        n1.setValue("{\"a\":1,\"b\":true}");
         n1.setDisplayName("display name");
         n1.setDescription("desc");
         m.getParameters().put("name", n1);
@@ -156,7 +156,8 @@ class ParameterControllerTest extends AbstractTest {
         m.setParameters(new HashMap<>());
 
         var n1 = new ParameterSpec.ParameterItem();
-        n1.setValue("{\"a\":123}");
+        //        n1.setValue(Map.of("a", 123));
+        n1.setValue("100");
         n1.setDisplayName("display name");
         n1.setDescription("desc");
         m.getParameters().put("n1", n1);

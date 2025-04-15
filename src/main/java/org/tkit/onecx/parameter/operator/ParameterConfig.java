@@ -22,10 +22,10 @@ public interface ParameterConfig {
     String key();
 
     /**
-     * Token configuration.
+     * Multi-tenancy configuration.
      */
-    @WithName("token")
-    TokenConfig token();
+    @WithName("tenant")
+    TenantConfig tenant();
 
     /**
      * Client configuration.
@@ -64,6 +64,26 @@ public interface ParameterConfig {
         @WithName("url")
         @WithDefault("http://onecx-parameter-svc:8080")
         String url();
+    }
+
+    /**
+     * Multi-tenancy configuration
+     */
+    interface TenantConfig {
+
+        /**
+         * Enabled or disable multi-tenancy configuration.
+         */
+        @WithName("enabled")
+        @WithDefault("true")
+        boolean enabled();
+
+        /**
+         * Token configuration.
+         */
+        @WithName("token")
+        TokenConfig token();
+
     }
 
     /**
