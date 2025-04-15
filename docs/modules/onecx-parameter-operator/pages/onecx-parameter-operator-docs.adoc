@@ -13,7 +13,7 @@ quarkus.operator-sdk.controllers.parameter.retry.interval.initial=5000
 quarkus.operator-sdk.controllers.parameter.retry.interval.multiplier=3
 quarkus.operator-sdk.controllers.parameter.retry.interval.max=300000
 quarkus.kubernetes-client.devservices.override-kubeconfig=true
-onecx.parameter.operator.clients.default=http://onecx-parameter-svc:8080
+onecx.parameters.operator.key=onecx
 %prod.quarkus.rest-client.parameter_client.providers=io.quarkus.oidc.client.reactive.filter.OidcClientRequestReactiveFilter
 %prod.quarkus.oidc-client.client-id=${quarkus.application.name}
 quarkus.operator-sdk.crd.validate=false
@@ -63,6 +63,10 @@ app:
         spec:
           kcConfig:
             defaultClientScopes: [ ocx-pa:write ]
+
+----
+
+lientScopes: [ ocx-pa:write ]
 
 ----
 

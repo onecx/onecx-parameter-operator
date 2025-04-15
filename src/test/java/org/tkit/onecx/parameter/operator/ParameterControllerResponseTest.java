@@ -35,6 +35,7 @@ class ParameterControllerResponseTest extends AbstractTest {
     void testWrongResponse() throws Exception {
 
         var s = new ParameterSpec();
+        s.setKey(KEY);
         s.setProductName("test1");
         s.setApplicationId("test-3");
         s.setParameters(new HashMap<>());

@@ -31,7 +31,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.config.SmallRyeConfig;
 
 @QuarkusTest
-class ParameterClaimArrayTest extends AbstractTest {
+class ParameterDisableTenantTest extends AbstractTest {
 
     @Inject
     Operator operator;
@@ -59,15 +59,9 @@ class ParameterClaimArrayTest extends AbstractTest {
     void beforeEach() {
         var tmp = config.unwrap(SmallRyeConfig.class).getConfigMapping(ParameterConfig.class);
 
-        var dt = Mockito.mock(ParameterConfig.TokenConfig.class);
-        Mockito.when(dt.userName()).thenReturn(tmp.tenant().token().userName());
-        Mockito.when(dt.headerParam()).thenReturn(tmp.tenant().token().headerParam());
-        Mockito.when(dt.claimOrganizationParamArray()).thenReturn(true);
-        Mockito.when(dt.claimOrganizationParam()).thenReturn(tmp.tenant().token().claimOrganizationParam());
-
         var tt = Mockito.mock(ParameterConfig.TenantConfig.class);
-        Mockito.when(tt.enabled()).thenReturn(tmp.tenant().enabled());
-        Mockito.when(tt.token()).thenReturn(dt);
+        Mockito.when(tt.enabled()).thenReturn(false);
+        Mockito.when(tt.token()).thenReturn(tmp.tenant().token());
 
         Mockito.when(dataConfig.tenant()).thenReturn(tt);
 
@@ -79,7 +73,7 @@ class ParameterClaimArrayTest extends AbstractTest {
     void tesTokenClaimArrayParamTest() {
 
         mockServerClient
-                .when(request().withPath("/default/operator/v1/parameters/test1/test-3").withMethod(HttpMethod.PUT))
+                .when(request().withPath("/default/operator/v1/parameters/test199/test-31").withMethod(HttpMethod.PUT))
                 .withId("mock")
                 .respond(httpRequest -> response().withStatusCode(Response.Status.NO_CONTENT.getStatusCode())
                         .withContentType(MediaType.APPLICATION_JSON));
@@ -87,19 +81,19 @@ class ParameterClaimArrayTest extends AbstractTest {
 
         var m = new ParameterSpec();
         m.setKey(KEY);
-        m.setProductName("test1");
-        m.setApplicationId("test-3");
+        m.setProductName("test199");
+        m.setApplicationId("test-31");
         m.setOrgId("default");
         m.setParameters(new HashMap<>());
 
         var n1 = new ParameterSpec.ParameterItem();
-        n1.setValue(null);
-        n1.setDisplayName("display name");
-        n1.setDescription("desc");
-        m.getParameters().put("name", n1);
+        n1.setValue("1");
+        n1.setDisplayName("display name2");
+        n1.setDescription("desc1");
+        m.getParameters().put("name1", n1);
 
         var data = new Parameter();
-        data.setMetadata(new ObjectMetaBuilder().withName("config-array").withNamespace(client.getNamespace()).build());
+        data.setMetadata(new ObjectMetaBuilder().withName("disable-tenant").withNamespace(client.getNamespace()).build());
         data.setSpec(m);
 
         client.resource(data).serverSideApply();

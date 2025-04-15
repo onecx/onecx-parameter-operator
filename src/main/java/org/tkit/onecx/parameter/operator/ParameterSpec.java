@@ -14,6 +14,9 @@ public class ParameterSpec {
     @JsonProperty(value = "key", required = true)
     private String key;
 
+    @JsonProperty(value = "url")
+    private String url;
+
     @JsonProperty(value = "applicationId", required = true)
     private String applicationId;
 
@@ -22,6 +25,14 @@ public class ParameterSpec {
 
     @JsonProperty(value = "parameters", required = true)
     private Map<String, ParameterItem> parameters;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Map<String, ParameterItem> getParameters() {
         return parameters;

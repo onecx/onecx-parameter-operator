@@ -5,6 +5,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.tkit.onecx.parameter.operator.ParameterConfig;
 
 import io.quarkiverse.mockserver.test.MockServerTestResource;
@@ -15,6 +16,10 @@ import io.smallrye.config.SmallRyeConfig;
 @SuppressWarnings("java:S1118")
 @QuarkusTestResource(MockServerTestResource.class)
 public abstract class AbstractTest {
+
+    public static final String MOCK_URL = ConfigProvider.getConfig().getValue("quarkus.mockserver.endpoint", String.class);
+
+    public static final String KEY = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
 
     public static class ConfigProducer {
 

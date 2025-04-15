@@ -1,0 +1,16 @@
+
+
+spec:
+  productName:
+  applicationId:
+  key:
+  orgId:
+  parameters:
+    param1:
+        displayName: as'sdadsd
+        description: sjkjfdkjfd
+        value:
+    param2:
+      displayName: as'sdadsd
+      description: sjkjfdkjfd
+      value: "{ \"from\": 1 }"
