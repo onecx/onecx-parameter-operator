@@ -16,4 +16,4 @@ app:
         enabled: true
         spec:
           kcConfig:
-            defaultClientScopes: [ ocx-pa:write ]
+            defaultClientScopes: [ ocx-pa-op:write ]
