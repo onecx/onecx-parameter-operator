@@ -17,8 +17,6 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
     private static final Logger log = LoggerFactory.getLogger(ParameterController.class);
 
-    private static final String KEY = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
-
     @Inject
     ParameterService service;
 
@@ -72,7 +70,9 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
             if (resource.getSpec() == null) {
                 return false;
             }
-            return KEY.equals(resource.getSpec().getKey());
+            var key = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
+            log.info("Add filter resource key {}", key);
+            return key.equals(resource.getSpec().getKey());
         }
     }
 
@@ -83,7 +83,9 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
             if (newResource.getSpec() == null) {
                 return false;
             }
-            return KEY.equals(newResource.getSpec().getKey());
+            var key = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
+            log.info("Update filter resource key {}", key);
+            return key.equals(newResource.getSpec().getKey());
         }
     }
 

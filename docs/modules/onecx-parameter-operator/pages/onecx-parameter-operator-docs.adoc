@@ -62,11 +62,11 @@ app:
         enabled: true
         spec:
           kcConfig:
-            defaultClientScopes: [ ocx-pa:write ]
+            defaultClientScopes: [ ocx-pa-op:write ]
 
 ----
 
-lientScopes: [ ocx-pa:write ]
+ntScopes: [ ocx-pa:write ]
 
 ----
 
