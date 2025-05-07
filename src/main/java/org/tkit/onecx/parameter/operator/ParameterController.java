@@ -71,7 +71,8 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
                 return false;
             }
             var key = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
-            log.info("Add resource '{}' filter controller key '{}' resource key {}", resource.getMetadata().getName(), resource.getSpec().getKey(), key);
+            log.info("Add resource '{}' filter controller key '{}' resource key {}", resource.getMetadata().getName(),
+                    resource.getSpec().getKey(), key);
             return key.equals(resource.getSpec().getKey());
         }
     }
@@ -84,7 +85,8 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
                 return false;
             }
             var key = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
-            log.info("Update resource '{}' filter controller key '{}' resource key '{}'", newResource.getMetadata().getName(), newResource.getSpec().getKey(), key);
+            log.info("Update resource '{}' filter controller key '{}' resource key '{}'", newResource.getMetadata().getName(),
+                    newResource.getSpec().getKey(), key);
             return key.equals(newResource.getSpec().getKey());
         }
     }
