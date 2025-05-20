@@ -48,7 +48,7 @@ class ParameterControllerResponseTest extends AbstractTest {
 
         UpdateControl<Parameter> result = reconciler.reconcile(m, null);
         assertThat(result).isNotNull();
-        assertThat(result.getResource().isPresent()).isTrue();
+        assertThat(result.getResource()).isPresent();
         assertThat(result.getResource().get()).isNotNull();
         assertThat(result.getResource().get().getStatus()).isNotNull();
         assertThat(result.getResource().get().getStatus().getStatus()).isNotNull().isEqualTo(ParameterStatus.Status.UNDEFINED);
