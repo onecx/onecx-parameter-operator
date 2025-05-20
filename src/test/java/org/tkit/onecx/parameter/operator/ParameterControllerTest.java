@@ -13,6 +13,7 @@ import jakarta.ws.rs.HttpMethod;
 import jakarta.ws.rs.core.Response;
 
 import org.awaitility.Awaitility;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
@@ -140,6 +141,9 @@ class ParameterControllerTest extends AbstractTest {
 
     @Test
     void productRestClientExceptionTest() {
+
+        var mockUrl = ConfigProvider.getConfig().getValue("quarkus.mockserver.endpoint", String.class);
+
         // create mock rest endpoint for workspace api
         mockServerClient
                 .when(request().withPath("/custom/operator/v1/parameters/test1/test-error-1")
@@ -150,7 +154,7 @@ class ParameterControllerTest extends AbstractTest {
         operator.start();
         var m = new ParameterSpec();
         m.setKey(KEY);
-        m.setUrl(MOCK_URL + "/custom");
+        m.setUrl(mockUrl + "/custom");
         m.setProductName("test1");
         m.setApplicationId("test-error-1");
         m.setParameters(new HashMap<>());

@@ -1,4 +1,3 @@
-:summaryTableId: onecx-parameter-operator
 [.configuration-legend]
 icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
 [.configuration-reference.searchable, cols="80,.^10,.^10"]
@@ -9,6 +8,10 @@ h|Type
 h|Default
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-key]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-key[`onecx.parameters.operator.key`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.key+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -26,6 +29,10 @@ endif::add-copy-button-to-env-var[]
 |`onecx`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-tenant-enabled]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-tenant-enabled[`onecx.parameters.operator.tenant.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.tenant.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -43,6 +50,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-tenant-token-user-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-tenant-token-user-name[`onecx.parameters.operator.tenant.token.user-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.tenant.token.user-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -60,6 +71,10 @@ endif::add-copy-button-to-env-var[]
 |`parameter-orchestrator-operator`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-tenant-token-header-param]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-tenant-token-header-param[`onecx.parameters.operator.tenant.token.header-param`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.tenant.token.header-param+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -77,6 +92,10 @@ endif::add-copy-button-to-env-var[]
 |`apm-principal-token`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-tenant-token-claim-organization-param]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-tenant-token-claim-organization-param[`onecx.parameters.operator.tenant.token.claim-organization-param`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.tenant.token.claim-organization-param+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -94,6 +113,10 @@ endif::add-copy-button-to-env-var[]
 |`orgId`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-tenant-token-claim-organization-param-array]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-tenant-token-claim-organization-param-array[`onecx.parameters.operator.tenant.token.claim-organization-param-array`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.tenant.token.claim-organization-param-array+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -111,6 +134,10 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-client-shared]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-client-shared[`onecx.parameters.operator.client.shared`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.client.shared+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -128,6 +155,10 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-client-connection-pool-size]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-client-connection-pool-size[`onecx.parameters.operator.client.connection-pool-size`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.client.connection-pool-size+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -145,6 +176,10 @@ endif::add-copy-button-to-env-var[]
 |`30`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-client-url]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-client-url[`onecx.parameters.operator.client.url`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.client.url+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -162,6 +197,10 @@ endif::add-copy-button-to-env-var[]
 |`http://onecx-parameter-svc:8080`
 
 a| [[onecx-parameter-operator_onecx-parameters-operator-leader-election-lease-name]] [.property-path]##link:#onecx-parameter-operator_onecx-parameters-operator-leader-election-lease-name[`onecx.parameters.operator.leader-election.lease-name`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.parameters.operator.leader-election.lease-name+++[]
+endif::add-copy-button-to-config-props[]
+
 
 [.description]
 --
@@ -180,5 +219,3 @@ endif::add-copy-button-to-env-var[]
 
 |===
 
-
-:!summaryTableId:

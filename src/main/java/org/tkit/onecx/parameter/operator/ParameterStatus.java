@@ -2,9 +2,7 @@ package org.tkit.onecx.parameter.operator;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.javaoperatorsdk.operator.api.ObservedGenerationAwareStatus;
-
-public class ParameterStatus extends ObservedGenerationAwareStatus {
+public class ParameterStatus {
 
     @JsonProperty("applicationId")
     private String applicationId;
