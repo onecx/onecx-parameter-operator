@@ -13,6 +13,7 @@ import jakarta.ws.rs.HttpMethod;
 import jakarta.ws.rs.core.Response;
 
 import org.awaitility.Awaitility;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
@@ -140,6 +141,9 @@ class ParameterControllerTest extends AbstractTest {
 
     @Test
     void productRestClientExceptionTest() {
+
+        var mockUrl = ConfigProvider.getConfig().getValue("quarkus.mockserver.endpoint", String.class);
+
         // create mock rest endpoint for workspace api
         mockServerClient
                 .when(request().withPath("/custom/operator/v1/parameters/test1/test-error-1")
@@ -150,7 +154,7 @@ class ParameterControllerTest extends AbstractTest {
         operator.start();
         var m = new ParameterSpec();
         m.setKey(KEY);
-        m.setUrl(MOCK_URL + "/custom");
+        m.setUrl(mockUrl + "/custom");
         m.setProductName("test1");
         m.setApplicationId("test-error-1");
         m.setParameters(new HashMap<>());
@@ -174,4 +178,52 @@ class ParameterControllerTest extends AbstractTest {
         mockServerClient.clear("mock");
     }
 
+    @Test
+    void productUpdateSpecTest() {
+        // create mock rest endpoint for workspace api
+        mockServerClient
+                .when(request().withPath("/default/operator/v1/parameters/test1/test-31").withMethod(HttpMethod.PUT))
+                .withId("mock")
+                .respond(httpRequest -> response().withStatusCode(Response.Status.NO_CONTENT.getStatusCode())
+                        .withContentType(MediaType.APPLICATION_JSON));
+        operator.start();
+
+        var m = new ParameterSpec();
+        m.setKey(KEY);
+        m.setProductName("test1");
+        m.setApplicationId("test-31");
+        m.setOrgId("default");
+        m.setParameters(new HashMap<>());
+
+        var n1 = new ParameterSpec.ParameterItem();
+        n1.setValue("{\"a\":1,\"b\":true}");
+        n1.setDisplayName("display name");
+        n1.setDescription("desc");
+        m.getParameters().put("name", n1);
+
+        var data = new Parameter();
+        data.setMetadata(new ObjectMetaBuilder().withName("to-update-spec-2").withNamespace(client.getNamespace()).build());
+        data.setSpec(m);
+
+        client.resource(data).serverSideApply();
+
+        await().pollDelay(2, SECONDS).untilAsserted(() -> {
+            ParameterStatus mfeStatus = client.resource(data).get().getStatus();
+            assertThat(mfeStatus).isNotNull();
+            assertThat(mfeStatus.getStatus()).isNotNull().isEqualTo(ParameterStatus.Status.UPDATED);
+        });
+
+        client.resource(data).inNamespace(client.getNamespace())
+                .edit(s -> {
+                    s.getSpec().getParameters().get("name").setDescription("update");
+                    return s;
+                });
+
+        await().pollDelay(4, SECONDS).untilAsserted(() -> {
+            ParameterStatus mfeStatus = client.resource(data).get().getStatus();
+            assertThat(mfeStatus).isNotNull();
+            assertThat(mfeStatus.getStatus()).isNotNull().isEqualTo(ParameterStatus.Status.UPDATED);
+        });
+        mockServerClient.clear("mock");
+    }
 }

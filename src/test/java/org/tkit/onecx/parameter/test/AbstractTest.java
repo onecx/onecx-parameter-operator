@@ -17,8 +17,6 @@ import io.smallrye.config.SmallRyeConfig;
 @QuarkusTestResource(MockServerTestResource.class)
 public abstract class AbstractTest {
 
-    public static final String MOCK_URL = ConfigProvider.getConfig().getValue("quarkus.mockserver.endpoint", String.class);
-
     public static final String KEY = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
 
     public static class ConfigProducer {

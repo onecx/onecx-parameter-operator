@@ -7,13 +7,15 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tkit.onecx.parameter.operator.client.ParameterService;
+import org.tkit.onecx.quarkus.operator.OperatorUtils;
 
+import io.javaoperatorsdk.operator.api.config.informer.Informer;
 import io.javaoperatorsdk.operator.api.reconciler.*;
 import io.javaoperatorsdk.operator.processing.event.source.filter.OnAddFilter;
 import io.javaoperatorsdk.operator.processing.event.source.filter.OnUpdateFilter;
 
-@ControllerConfiguration(name = "parameter", namespaces = Constants.WATCH_CURRENT_NAMESPACE, onAddFilter = ParameterController.AddFilter.class, onUpdateFilter = ParameterController.UpdateFilter.class)
-public class ParameterController implements Reconciler<Parameter>, ErrorStatusHandler<Parameter> {
+@ControllerConfiguration(name = "parameter", informer = @Informer(name = "parameter", namespaces = Constants.WATCH_CURRENT_NAMESPACE, onAddFilter = ParameterController.AddFilter.class, onUpdateFilter = ParameterController.UpdateFilter.class), generationAwareEventProcessing = false)
+public class ParameterController implements Reconciler<Parameter> {
 
     private static final Logger log = LoggerFactory.getLogger(ParameterController.class);
 
@@ -36,7 +38,7 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
         status.setStatus(ParameterStatus.Status.ERROR);
         status.setMessage(e.getMessage());
         parameter.setStatus(status);
-        return ErrorStatusUpdateControl.updateStatus(parameter);
+        return ErrorStatusUpdateControl.patchStatus(parameter);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
         updateStatusPojo(parameter, responseCode);
         log.info("Product '{}' reconciled - updating status", parameter.getMetadata().getName());
-        return UpdateControl.updateStatus(parameter);
+        return UpdateControl.patchStatus(parameter);
     }
 
     private void updateStatusPojo(Parameter parameter, int responseCode) {
@@ -67,7 +69,7 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
         @Override
         public boolean accept(Parameter resource) {
-            if (resource.getSpec() == null) {
+            if (!OperatorUtils.shouldProcessAdd(resource)) {
                 return false;
             }
             var key = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
@@ -82,7 +84,7 @@ public class ParameterController implements Reconciler<Parameter>, ErrorStatusHa
 
         @Override
         public boolean accept(Parameter newResource, Parameter oldResource) {
-            if (newResource.getSpec() == null) {
+            if (!OperatorUtils.shouldProcessUpdate(newResource, oldResource)) {
                 return false;
             }
             var key = ConfigProvider.getConfig().getValue("onecx.parameters.operator.key", String.class);
