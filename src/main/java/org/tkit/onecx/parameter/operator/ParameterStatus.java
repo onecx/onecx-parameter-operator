@@ -75,7 +75,4 @@ public class ParameterStatus {
         return observedGeneration;
     }
 
-    public void setObservedGeneration(Long observedGeneration) {
-        this.observedGeneration = observedGeneration;
-    }
 }
