@@ -1,5 +1,7 @@
 app:
   name: operator
+  template:
+    oidc_client_id: "ONECX_OIDC_CLIENT_CLIENT_ID"
   image:
     repository: "onecx/onecx-parameter-operator"
   envCustom:
@@ -9,7 +11,6 @@ app:
           fieldPath: metadata.namespace
   serviceAccount:
     enabled: true
-
   operator:
     keycloak:
       client:
