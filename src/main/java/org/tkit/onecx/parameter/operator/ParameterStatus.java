@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ParameterStatus {
 
+    @JsonProperty("observedGeneration")
+    private Long observedGeneration;
+
     @JsonProperty("applicationId")
     private String applicationId;
 
@@ -66,5 +69,13 @@ public class ParameterStatus {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Long getObservedGeneration() {
+        return observedGeneration;
+    }
+
+    public void setObservedGeneration(Long observedGeneration) {
+        this.observedGeneration = observedGeneration;
     }
 }
