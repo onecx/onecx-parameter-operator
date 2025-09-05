@@ -135,7 +135,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <url>https://raw.githubusercontent.com/onecx/onecx-parameter-svc/refs/heads/main/src/main/openapi/openapi-operator-v1.yaml</url>
+                    <url>https://raw.githubusercontent.com/onecx/onecx-parameter-svc/refs/heads/main/src/main/openapi/onecx-parameter-operator-v1.yaml</url>
                     <outputDirectory>target/tmp/openapi</outputDirectory>
                     <outputFileName>onecx-parameter-operator-v1.yaml</outputFileName>
                     <skipCache>true</skipCache>
