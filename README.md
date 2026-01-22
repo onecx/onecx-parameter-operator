@@ -1,2 +1,2 @@
 # onecx-parameter-operator
-OneCx parameter k8s operator
+OneCX Parameter K8s Operator
