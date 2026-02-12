@@ -1,10 +1,12 @@
 
 include::onecx-parameter-operator-attributes.adoc[opts=optional]
 
-=== Default properties
+{docker-registry}[Link to Docker registry]
+
+== Default properties
 
 .{properties-file}
-[%collapsible%open]
+[%collapsible]
 ====
 [source,properties,subs=attributes+]
 ----
@@ -15,7 +17,7 @@ quarkus.operator-sdk.controllers.parameter.retry.interval.max=300000
 quarkus.kubernetes-client.devservices.override-kubeconfig=true
 onecx.parameters.operator.key=onecx
 %prod.quarkus.rest-client.parameter_client.providers=io.quarkus.oidc.client.reactive.filter.OidcClientRequestReactiveFilter
-%prod.quarkus.oidc-client.client-id=${ONECX_OIDC_CLIENT_CLIENT_ID:${quarkus.application.name}}
+%prod.quarkus.oidc-client.client-id=${quarkus.application.name}
 quarkus.operator-sdk.crd.validate=false
 quarkus.operator-sdk.helm.enabled=true
 quarkus.openapi-generator.codegen.input-base-dir=target/tmp/openapi
@@ -26,28 +28,22 @@ quarkus.openapi-generator.codegen.spec.onecx_parameter_operator_v1_yaml.enable-s
 ----
 ====
 
-=== Extensions
-
+== Extensions
+.Extensions List
+[%collapsible]
+====
 include::onecx-parameter-operator-extensions.adoc[opts=optional]
+====
 
-=== Container
+== Helm
 
-{docker-registry}[Docker registry]
+{helm-registry}[Link to Helm registry]
 
-
-=== Helm
-
-{helm-registry}[Helm registry]
-
-Default values
-
-.{helm-file}
+.Default values in {helm-file}
 [source,yaml]
 ----
 app:
   name: operator
-  template:
-    oidc_client_id: "ONECX_OIDC_CLIENT_CLIENT_ID"
   image:
     repository: "onecx/onecx-parameter-operator"
   envCustom:
@@ -66,4 +62,3 @@ app:
             defaultClientScopes: [ ocx-pa-op:write ]
 
 ----
-
