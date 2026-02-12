@@ -1,10 +1,9 @@
 include::onecx-parameter-operator-attributes.adoc[opts=optional]
 
-== onecx-parameter-operator
+= onecx-parameter-operator
 
-include::docs.adoc[opts=optional]
 
-=== Configuration
+== Configuration
 include::onecx-parameter-operator.adoc[opts=optional]
 
 include::onecx-parameter-operator-docs.adoc[opts=optional]
