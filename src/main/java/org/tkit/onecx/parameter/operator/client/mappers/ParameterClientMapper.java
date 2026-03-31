@@ -28,7 +28,7 @@ public abstract class ParameterClientMapper {
         }
         List<ParameterUpdateRequest> parameters = new ArrayList<>();
         value.forEach(
-                (k, v) -> parameters.add(create(k, v.getDisplayName(), v.getDisplayName(), valueMapper.toMap(v.getValue()))));
+                (k, v) -> parameters.add(create(k, v.getDisplayName(), v.getDescription(), valueMapper.toMap(v.getValue()))));
         return parameters;
     }
 
